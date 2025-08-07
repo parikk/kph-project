@@ -1,14 +1,404 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemuda Hijrah Member</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+    {
+        "imports": {
+            "@material/web/": "https://esm.run/@material/web/"
+        }
+    }
+    </script>
+    <script type="module">
+        import '@material/web/all.js';
+        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <style>
+        /* Material Design 3 Design Tokens */
+        :root {
+            --md-sys-color-primary: #9fc9ff;
+            --md-sys-color-on-primary: #00325a;
+            --md-sys-color-primary-container: #00497e;
+            --md-sys-color-on-primary-container: #d0e4ff;
+            --md-sys-color-secondary: #bcc7dc;
+            --md-sys-color-on-secondary: #253140;
+            --md-sys-color-secondary-container: #3b4858;
+            --md-sys-color-on-secondary-container: #d8e3f9;
+            --md-sys-color-tertiary: #a5d3f2;
+            --md-sys-color-on-tertiary: #00344a;
+            --md-sys-color-tertiary-container: #004b69;
+            --md-sys-color-on-tertiary-container: #c3e8ff;
+            --md-sys-color-surface: #121d26;
+            --md-sys-color-on-surface: #dce3ea;
+            --md-sys-color-surface-variant: #404953;
+            --md-sys-color-on-surface-variant: #c0c7d0;
+            --md-sys-color-outline: #8a929a;
+            --md-sys-color-outline-variant: #404953;
+            --md-sys-color-surface-container: #1c252e;
+            --md-sys-color-surface-container-high: #232c35;
+            --md-sys-color-surface-container-highest: #2a333d;
+            
+            /* Elevation tokens */
+            --md-sys-elevation-level0: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+            --md-sys-elevation-level1: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level2: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level3: 0px 1px 3px 0px rgba(0, 0, 0, 0.3), 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+            
+            /* Shape tokens */
+            --md-sys-shape-corner-extra-large: 28px;
+            --md-sys-shape-corner-large: 16px;
+            --md-sys-shape-corner-medium: 12px;
+            --md-sys-shape-corner-small: 8px;
+            --md-sys-shape-corner-extra-small: 4px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--md-sys-color-surface);
+            color: var(--md-sys-color-on-surface);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        
+        .app-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+            background: linear-gradient(135deg, 
+                var(--md-sys-color-surface) 0%, 
+                var(--md-sys-color-primary-container) 100%);
+            min-height: 100vh;
+        }
+        
+        .hero-section {
+            text-align: center;
+            padding: 48px 0 64px 0;
+            background-color: var(--md-sys-color-primary-container);
+            border-radius: var(--md-sys-shape-corner-extra-large);
+            margin-bottom: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, 
+                rgba(103, 80, 164, 0.1) 0%, 
+                transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .main-title {
+            color: var(--md-sys-color-on-primary-container);
+            margin-bottom: 16px;
+            font-weight: 700;
+            font-size: 38px;
+            letter-spacing: -0.5px;
+        }
+        
+        .decorative-chip {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--md-sys-color-tertiary-container);
+            color: var(--md-sys-color-on-tertiary-container);
+            padding: 8px 16px;
+            border-radius: var(--md-sys-shape-corner-small);
+            font-weight: 500;
+            box-shadow: var(--md-sys-elevation-level1);
+        }
+        
+        .members-section {
+            padding: 24px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            color: var(--md-sys-color-primary);
+            margin-bottom: 32px;
+            font-size: 22px;
+        }
+        
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+        
+        .member-card {
+            background-color: var(--md-sys-color-surface-container);
+            border-radius: var(--md-sys-shape-corner-large);
+            padding: 24px;
+            box-shadow: var(--md-sys-elevation-level1);
+            transition: all 0.3s cubic-bezier(0.2, 0.0, 0.2, 1);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .member-card:hover {
+            box-shadow: var(--md-sys-elevation-level3);
+            transform: translateY(-2px);
+            background-color: var(--md-sys-color-surface-container-high);
+        }
+        
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                var(--md-sys-color-primary), 
+                var(--md-sys-color-tertiary));
+            border-radius: var(--md-sys-shape-corner-large) var(--md-sys-shape-corner-large) 0 0;
+        }
+        
+        .member-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, 
+                var(--md-sys-color-primary), 
+                var(--md-sys-color-tertiary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px auto;
+            box-shadow: var(--md-sys-elevation-level2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .member-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .member-avatar md-icon {
+            --md-icon-size: 32px;
+            color: var(--md-sys-color-on-primary);
+        }
+        
+        .member-name {
+            text-align: center;
+            color: var(--md-sys-color-on-surface);
+            margin-bottom: 16px;
+        }
+        
+        .member-quote {
+            background-color: var(--md-sys-color-surface-container-highest);
+            border-radius: var(--md-sys-shape-corner-medium);
+            padding: 16px;
+            color: var(--md-sys-color-on-surface-variant);
+            text-align: center;
+            font-style: italic;
+            position: relative;
+            border-left: 4px solid var(--md-sys-color-primary);
+        }
+        
+        .member-quote::before {
+            content: '"';
+            font-size: 24px;
+            color: var(--md-sys-color-primary);
+            position: absolute;
+            top: -4px;
+            left: 8px;
+            font-weight: bold;
+            line-height: 1;
+        }
+        
+        .member-quote::after {
+            content: '"';
+            font-size: 24px;
+            color: var(--md-sys-color-primary);
+            position: absolute;
+            bottom: -8px;
+            right: 8px;
+            font-weight: bold;
+            line-height: 1;
+        }
+        
+        /* Animation keyframes */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(32px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Card entrance animations */
+        .member-card {
+            animation: slideUp 0.6s cubic-bezier(0.2, 0.0, 0.2, 1) both;
+        }
+        
+        .member-card:nth-child(1) { animation-delay: 0.1s; }
+        .member-card:nth-child(2) { animation-delay: 0.2s; }
+        .member-card:nth-child(3) { animation-delay: 0.3s; }
+        .member-card:nth-child(4) { animation-delay: 0.4s; }
+        .member-card:nth-child(5) { animation-delay: 0.5s; }
+        .member-card:nth-child(6) { animation-delay: 0.6s; }
+        .member-card:nth-child(7) { animation-delay: 0.7s; }
+        .member-card:nth-child(8) { animation-delay: 0.8s; }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .app-container {
+                padding: 16px;
+            }
+            
+            .hero-section {
+                padding: 32px 16px;
+                margin-bottom: 32px;
+            }
+            
+            .members-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .member-card {
+                padding: 20px;
+            }
+            
+            .member-avatar {
+                width: 64px;
+                height: 64px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 24px 12px;
+            }
+            
+            .member-card {
+                padding: 16px;
+            }
+            
+            .member-avatar {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+    <div class="app-container">
+        <header class="hero-section">
+            <div class="hero-content">
+                <h1 class="md-typescale-display-medium main-title">Pemuda Hijrah</h1>
+                <div class="decorative-chip">
+                    <span class="md-typescale-label-large">✨ 8 Orang Gila</span>
+                </div>
+            </div>
+        </header>
+        
+        <main class="members-section">
+            <h2 class="md-typescale-headline-medium section-title">Kenalan Dengan Penguasa PSDM</h2>
+            
+            <div class="members-grid">
+                <md-card class="member-card">
+                    <div class="member-avatar">
+                        <img src="foto/fariqh.png" alt="">
+                    </div>
+                    <h3 class="md-typescale-title-large member-name">fariqh</h3>
+                    <p class="md-typescale-body-medium member-quote">Mantapp</p>
+                </md-card>
+                
+                <md-card class="member-card">
+                    <div class="member-avatar">
+                        <img src="foto/nailah.png" alt="">
+                    </div>
+                    <h3 class="md-typescale-title-large member-name">nailah</h3>
+                    <p class="md-typescale-body-medium member-quote">di isi dengan kata kata terbaik</p>
+                </md-card>
+                
+                <md-card class="member-card">
+                    <div class="member-avatar">
+                        <img src="foto/pakde.png" alt="">
+                    </div>
+                    <h3 class="md-typescale-title-large member-name">pakdee</h3>
+                    <p class="md-typescale-body-medium member-quote">di isi dengan kata kata terbaik</p>
+                </md-card>
+                
+                <md-card class="member-card">
+                    <div class="member-avatar">
+                        <img src="foto/qilz.png" alt="">
+                    </div>
+                    <h3 class="md-typescale-title-large member-name">qilzz</h3>
+                    <p class="md-typescale-body-medium member-quote">di isi dengan kata kata terbaik</p>
+                </md-card>
+                
+                <md-card class="member-card">
+                    <div class="member-avatar">
+                        <md-icon>C</md-icon>
+                    </div>
+                    <h3 class="md-typescale-title-large member-name">cuak</h3>
+                    <p class="md-typescale-body-medium member-quote">di isi dengan kata kata terbaik</p>
+                </md-card>
+                
+                <md-card class="member-card">
+                    <div class="member-avatar">
+                        <md-icon>B</md-icon>
+                    </div>
+                    <h3 class="md-typescale-title-large member-name">bila</h3>
+                    <p class="md-typescale-body-medium member-quote">di isi dengan kata kata terbaik</p>
+                </md-card>
+                
+                <md-card class="member-card">
+                    <div class="member-avatar">
+                        <md-icon>M</md-icon>
+                    </div>
+                    <h3 class="md-typescale-title-large member-name">mided</h3>
+                    <p class="md-typescale-body-medium member-quote">di isi dengan kata kata terbaik</p>
+                </md-card>
+                
+                <md-card class="member-card">
+                    <div class="member-avatar">
+                        <md-icon>K</md-icon>
+                    </div>
+                    <h3 class="md-typescale-title-large member-name">kayy</h3>
+                    <p class="md-typescale-body-medium member-quote">di isi dengan kata kata terbaik</p>
+                </md-card>
+            </div>
+        </main>
+    </div>
 </body>
 </html>
